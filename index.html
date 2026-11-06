@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="FluentEdge Español Perfecto: Plataforma de entrenamiento integral de escritura y pronunciación en español desde Principiante (A1) hasta Maestría (C2) según el MCER y DELE (Instituto Cervantes), con voces de Argentina y España.">
+  <meta name="keywords"
+    content="FluentEdge, Español Perfecto, MCER, DELE, Instituto Cervantes, A1, A2, B1, B2, C1, C2, Español Rioplatense, Español Peninsular, Argentina, España">
+  <title>FluentEdge — Español Perfecto (A1–C2 MCER / DELE)</title>
+
+  <!-- Google Fonts: Playfair Display, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=20261105-es2">
+</head>
+
+<body class="stage-1-active theme-c1">
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-crest" id="brandCrest" title="FluentEdge Español Perfecto — Nivel Oficial Activo: C1 Dominio">C1</div>
+        <div class="brand-titles">
+          <h1>FluentEdge · Español Perfecto</h1>
+          <div class="brand-tagline">Entrenamiento Oficial MCER / DELE · Principiante a Maestría (A1–C2)</div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="mcer-level-selector-wrap" id="cefrModeToggle" role="radiogroup"
+          aria-label="Selector de Nivel Oficial MCER / DELE (A1 a C2)">
+          <span class="mcer-selector-caption">
+            <span>Rango Oficial MCER / DELE [A1 → C2]</span>
+            <kbd class="hotkey-badge">Alt+M</kbd>
+          </span>
+          <div class="mcer-level-selector-bar">
+            <button type="button" class="mcer-level-btn" id="modeA1Btn" role="radio" aria-checked="false" data-level="A1" title="Nivel A1: Acceso (Principiante · 50–80 palabras)">
+              <span class="mcer-level-code">A1</span>
+              <span class="mcer-level-tag">Acceso</span>
+            </button>
+            <button type="button" class="mcer-level-btn" id="modeA2Btn" role="radio" aria-checked="false" data-level="A2" title="Nivel A2: Plataforma (Elemental · 90–130 palabras)">
+              <span class="mcer-level-code">A2</span>
+              <span class="mcer-level-tag">Elemental</span>
+            </button>
+            <button type="button" class="mcer-level-btn" id="modeB1Btn" role="radio" aria-checked="false" data-level="B1" title="Nivel B1: Umbral (Intermedio · 140–180 palabras)">
+              <span class="mcer-level-code">B1</span>
+              <span class="mcer-level-tag">Umbral</span>
+            </button>
+            <button type="button" class="mcer-level-btn" id="modeB2Btn" role="radio" aria-checked="false" data-level="B2" title="Nivel B2: Avanzado (Intermedio Alto · 180–220 palabras)">
+              <span class="mcer-level-code">B2</span>
+              <span class="mcer-level-tag">Avanzado</span>
+            </button>
+            <button type="button" class="mcer-level-btn active" id="modeC1Btn" role="radio" aria-checked="true" data-level="C1" title="Nivel C1: Dominio Operativo Eficaz (Superior · 220–260 palabras)">
+              <span class="mcer-level-code">C1</span>
+              <span class="mcer-level-tag">Dominio</span>
+            </button>
+            <button type="button" class="mcer-level-btn" id="modeC2Btn" role="radio" aria-checked="false" data-level="C2" title="Nivel C2: Maestría Panhispánica (Perfección · 280–320 palabras)">
+              <span class="mcer-level-code">C2</span>
+              <span class="mcer-level-tag">Maestría</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Accent & Voice Model Selector (Argentina es-AR & España es-ES) -->
+    <section class="header-voice-bar" id="headerVoiceBar" aria-label="Selección de Acento y Voz Modelo (Argentina y España)">
+      <div class="voice-bar-label">
+        <svg class="voice-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <span class="voice-label-text">Voz Modelo:</span>
+      </div>
+
+      <div class="voice-flags-group">
+        <!-- 🇦🇷 Argentina (es-AR — Español Rioplatense) -->
+        <div class="voice-flag-card active active-accent" id="flagCardAR" data-accent="ar" data-accent-card="ar">
+          <div class="flag-badge-btn" title="Español Rioplatense (Argentina · Cadencia Porteña)">
+            <span class="flag-emblem" aria-hidden="true">🇦🇷</span>
+            <span class="flag-title">Argentina (Rioplatense)</span>
+          </div>
+          <div class="voice-gender-split" role="group" aria-label="Selección de Voz Argentina">
+            <button type="button" class="voice-gender-btn active" id="voiceBtnArFemale" data-voice="ar_elena" data-accent="ar" data-gender="female" aria-label="Voz Femenina Argentina (Elena)" title="Español Rioplatense — Femenina (Elena · Cálida y Clara)">
+              <span class="gender-sym">♀</span>
+              <span class="gender-name">Elena</span>
+            </button>
+            <button type="button" class="voice-gender-btn" id="voiceBtnArMale" data-voice="ar_mateo" data-accent="ar" data-gender="male" aria-label="Voz Masculina Argentina (Mateo)" title="Español Rioplatense — Masculina (Mateo · Barítono Sereno)">
+              <span class="gender-sym">♂</span>
+              <span class="gender-name">Mateo</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 🇪🇸 España (es-ES — Español Peninsular) -->
+        <div class="voice-flag-card" id="flagCardES" data-accent="es" data-accent-card="es">
+          <div class="flag-badge-btn" title="Español Peninsular (España · Norma Castellana)">
+            <span class="flag-emblem" aria-hidden="true">🇪🇸</span>
+            <span class="flag-title">España (Peninsular)</span>
+          </div>
+          <div class="voice-gender-split" role="group" aria-label="Selección de Voz de España">
+            <button type="button" class="voice-gender-btn" id="voiceBtnEsFemale" data-voice="es_lucia" data-accent="es" data-gender="female" aria-label="Voz Femenina de España (Lucía)" title="Español Peninsular — Femenina (Lucía · Dicción Castellana)">
+              <span class="gender-sym">♀</span>
+              <span class="gender-name">Lucía</span>
+            </button>
+            <button type="button" class="voice-gender-btn" id="voiceBtnEsMale" data-voice="es_alvaro" data-accent="es" data-gender="male" aria-label="Voz Masculina de España (Álvaro)" title="Español Peninsular — Masculina (Álvaro · Barítono Ibérico)">
+              <span class="gender-sym">♂</span>
+              <span class="gender-name">Álvaro</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Stepper -->
+    <nav class="phase-stepper" aria-label="Etapas de entrenamiento">
+      <div class="step-card active" id="stepIndicator1" role="button" tabindex="0" title="Etapa 1: Guía Pedagógica y Criterios de Evaluación MCER / DELE">
+        <div class="step-number">1</div>
+        <div class="step-info">
+          <h4>Guía y Criterios MCER</h4>
+          <p id="step1LexisHint">Estándares A1–C2, Rúbricas y Flujo</p>
+        </div>
+      </div>
+      <div class="step-card" id="stepIndicator2" role="button" tabindex="0" title="Etapa 2: Estudio de Escritura y Evaluación">
+        <div class="step-number">2</div>
+        <div class="step-info">
+          <h4>Estudio de Escritura</h4>
+          <p id="step2WordCountHint">220–260 Palabras y Radar Sintáctico</p>
+        </div>
+      </div>
+      <div class="step-card" id="stepIndicator3" role="button" tabindex="0" title="Etapa 3: Estudio de Habla y Pronunciación">
+        <div class="step-number" id="step3LockIcon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <div class="step-info">
+          <h4>Habla y Pronunciación</h4>
+          <p>Lectura en Voz Alta y Cadencia Nativa</p>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Workspace Container -->
+    <main class="main-workspace stage-flow-workspace" id="mainWritingWorkspace">
+
+      <!-- STAGE 1: Educational Stage (Guidelines & Evaluation Criteria) -->
+      <section class="stage-section stage-1-view glass-panel active-stage" id="stage1Panel" aria-labelledby="topicHeading">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            <h2 id="topicHeading">Etapa 1: Guía Pedagógica y Criterios Oficiales (A1–C2)</h2>
+          </div>
+        </div>
+
+        <!-- Interactive A1–C2 Educational Requirements Breakdown Card -->
+        <div class="educational-requirements-card" id="stage1ReqsCard">
+          <div class="reqs-card-header">
+            <div class="reqs-header-left">
+              <div class="reqs-badge-row">
+                <span class="reqs-level-indicator" id="reqsLevelIndicator">ESTÁNDAR MCER C1</span>
+                <span class="reqs-level-tagline" id="reqsLevelTagline">Dominio Operativo Eficaz · Instituto Cervantes (DELE C1)</span>
+              </div>
+              <p class="reqs-header-callout" id="reqsHeaderCallout">
+                Referencia de escritura avanzada: demuestre un discurso claro, fluido y bien estructurado con riqueza léxica, conectores cohesivos y dominio del subjuntivo y la subordinación compleja.
+              </p>
+            </div>
+            <div class="reqs-header-right">
+              <span class="reqs-mode-tip">Cambia de nivel arriba (A1–C2) o con <kbd class="hotkey-badge">Alt+M</kbd></span>
+            </div>
+          </div>
+
+          <div class="reqs-pillars-grid">
+            <!-- Pillar 1: Word Count & Architecture -->
+            <div class="reqs-pillar-card">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+              <div class="pillar-content">
+                <span class="pillar-title">Extensión y Párrafos</span>
+                <div class="pillar-metric" id="reqsWordMetric">220 – 260 palabras</div>
+                <p class="pillar-desc" id="reqsWordDesc">Desarrollo analítico distribuido en 3–4 párrafos coherentes (±5 palabras de margen). Introducción clara, desarrollo argumentativo y conclusión.</p>
+              </div>
+            </div>
+
+            <!-- Pillar 2: Compulsory Lexis -->
+            <div class="reqs-pillar-card">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+              </div>
+              <div class="pillar-content">
+                <span class="pillar-title">Léxico Meta Obligatorio</span>
+                <div class="pillar-metric" id="reqsLexisMetric">10 / 10 Palabras Requeridas</div>
+                <p class="pillar-desc" id="reqsLexisDesc">Integra las 10 palabras asignadas del nivel activo (3 verbos, 3 sustantivos, 2 adjetivos y 2 adverbios). Se reconocen conjugaciones y plurales naturales.</p>
+              </div>
+            </div>
+
+            <!-- Pillar 3: Syntactic Complexity -->
+            <div class="reqs-pillar-card">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+              </div>
+              <div class="pillar-content">
+                <span class="pillar-title">Complejidad Gramatical</span>
+                <div class="pillar-metric" id="reqsSyntaxMetric">Mínimo 4 Estructuras</div>
+                <p class="pillar-desc" id="reqsSyntaxDesc">Incorpora estructuras propias de tu nivel en el radar en vivo: desde conectores y perífrasis (A1–A2) hasta subjuntivo, pasiva refleja y estructuras hendidas (B1–C2).</p>
+              </div>
+            </div>
+
+            <!-- Pillar 4: Register & Passing Mark -->
+            <div class="reqs-pillar-card">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="pillar-content">
+                <span class="pillar-title">Registro y Nota de Corte</span>
+                <div class="pillar-metric" id="reqsPassMetric">≥ 75% Puntuación Global</div>
+                <p class="pillar-desc" id="reqsPassDesc">Adecuación al registro del nivel seleccionado, cohesión discursiva y ortografía cuidada para desbloquear la Etapa 3 de pronunciación.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Bento Grid -->
+          <div class="reqs-bento-section">
+            <div class="bento-section-header">
+              <span class="bento-section-tag">Arquitectura Técnica y Evaluación Oficial MCER / DELE</span>
+              <h3 class="bento-section-title">Cómo se Evalúa tu Desempeño en las Etapas 2 y 3</h3>
+              <p class="bento-section-subtitle">Desglose completo de las 4 escalas analíticas de escritura, el generador rápido con IA y el análisis acústico de pronunciación rioplatense y peninsular.</p>
+            </div>
+
+            <div class="reqs-bento-grid">
+              <!-- Bento Card 1: Stage 2 Analytical Evaluation Scales -->
+              <div class="bento-card bento-card-eval">
+                <div class="bento-card-header">
+                  <div class="bento-icon-badge">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                      <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="bento-label">Evaluación Analítica · Etapa 2</span>
+                    <h4 class="bento-title">Estudio de Escritura: 4 Escalas DELE (20 Puntos)</h4>
+                  </div>
+                </div>
+                <p class="bento-text">
+                  Tu texto se califica mediante una rúbrica multidimensional inspirada en los criterios del Instituto Cervantes (0–5 puntos por escala):
+                </p>
+                <div class="bento-rubric-list">
+                  <div class="bento-rubric-item">
+                    <strong class="rubric-name">1. Contenido y Cumplimiento (0–5):</strong>
+                    <span>Adecuación al tema arbóreo (Sujeto Raíz + 2 Subtemas), extensión exacta y estructura de párrafos.</span>
+                  </div>
+                  <div class="bento-rubric-item">
+                    <strong class="rubric-name">2. Adecuación Comunicativa (0–5):</strong>
+                    <span>Registro apropiado al nivel (cotidiano en A1–A2; argumentativo en B1–B2; académico culto en C1–C2).</span>
+                  </div>
+                  <div class="bento-rubric-item">
+                    <strong class="rubric-name">3. Cohesión y Organización (0–5):</strong>
+                    <span>Progresión temática fluida, uso de conectores lógicos y marcadores del discurso panhispánico.</span>
+                  </div>
+                  <div class="bento-rubric-item">
+                    <strong class="rubric-name">4. Riqueza Léxica y Gramática (0–5):</strong>
+                    <span>Integración de las 10 palabras meta y cumplimiento de las estructuras del Radar Gramatical.</span>
+                  </div>
+                </div>
+                <div class="bento-callout-pill">
+                  <span class="bento-pill-dot"></span>
+                  <span>Llave de paso: 10/10 Palabras Meta + Estructuras del Radar + Extensión del Nivel para avanzar a Habla</span>
+                </div>
+              </div>
+
+              <!-- Bento Card 2: AI Prompt Fast-Track -->
+              <div class="bento-card bento-card-lenience">
+                <div class="bento-card-header">
+                  <div class="bento-icon-badge bento-icon-gold">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="bento-label bento-label-accent">Vía Rápida con IA</span>
+                    <h4 class="bento-title">Generador de Prompt IA: Pasa Directo a Hablar</h4>
+                  </div>
+                </div>
+                <p class="bento-text">
+                  Si deseas estudiar un texto modelo impecable o ir directamente a practicar tu pronunciación en la Etapa 3:
+                </p>
+                <div class="bento-steps-row">
+                  <div class="bento-step-box">
+                    <div class="step-badge">Paso 1</div>
+                    <span class="step-desc">En la Etapa 2, pulsa <strong>Prompt IA</strong> <kbd class="hotkey-badge">Alt+P</kbd> para copiar la instrucción calibrada.</span>
+                  </div>
+                  <div class="bento-step-box">
+                    <div class="step-badge">Paso 2</div>
+                    <span class="step-desc">Pégala en ChatGPT, Claude o Gemini para generar un texto exacto de tu nivel (A1–C2).</span>
+                  </div>
+                  <div class="bento-step-box">
+                    <div class="step-badge">Paso 3</div>
+                    <span class="step-desc">Pega el texto en el editor y pulsa <strong>Evaluar</strong> <kbd class="hotkey-badge">Ctrl+Enter</kbd> para desbloquear Habla.</span>
+                  </div>
+                </div>
+                <div class="bento-tip-box">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  <span>Sin penalización: ideal para aprender cómo se integran las 10 palabras y practicar lectura en voz alta.</span>
+                </div>
+              </div>
+
+              <!-- Bento Card 3: Stage 3 Speaking Evaluation -->
+              <div class="bento-card bento-card-speaking">
+                <div class="bento-card-header">
+                  <div class="bento-icon-badge bento-icon-emerald">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                      <line x1="12" y1="19" x2="12" y2="23"></line>
+                      <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="bento-label">Evaluación Acústica · Etapa 3</span>
+                    <h4 class="bento-title">Teleprompter en Vivo y Voces de Argentina y España</h4>
+                  </div>
+                </div>
+                <p class="bento-text">
+                  En la Etapa 3 lees tu texto en voz alta. El motor fonético evalúa tres dimensiones en tiempo real:
+                </p>
+                <div class="bento-metric-pills-row">
+                  <div class="bento-metric-pill">
+                    <div class="pill-metric-header">
+                      <span class="pill-dot emerald-dot"></span>
+                      <strong>Precisión Fonética Palabra por Palabra</strong>
+                    </div>
+                    <p class="pill-metric-desc">El reconocimiento de voz en español (<code>es-AR</code> / <code>es-ES</code>) ilumina cada palabra en verde a medida que la pronuncias con claridad.</p>
+                  </div>
+                  <div class="bento-metric-pill">
+                    <div class="pill-metric-header">
+                      <span class="pill-dot gold-dot"></span>
+                      <strong>Cadencia Adaptada al Nivel (PPM)</strong>
+                    </div>
+                    <p class="pill-metric-desc">Mide tus palabras por minuto según tu nivel: desde 90–120 PPM en A1 hasta 135–165 PPM en C2, fomentando la sinalefa natural.</p>
+                  </div>
+                  <div class="bento-metric-pill">
+                    <div class="pill-metric-header">
+                      <span class="pill-dot purple-dot"></span>
+                      <strong>Modelos Nativos 🇦🇷 Rioplatense y 🇪🇸 Peninsular</strong>
+                    </div>
+                    <p class="pill-metric-desc">Alterna entre Elena y Mateo (Argentina) o Lucía y Álvaro (España), y practica sílaba tónica con el taller «Repite Después de Mí».</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bento Card 4: Complete A1–C2 Progression Table -->
+              <div class="bento-card bento-card-standards">
+                <div class="bento-card-header">
+                  <div class="bento-icon-badge bento-icon-purple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="bento-label">Escala Oficial Completa (Principiante a Maestría)</span>
+                    <h4 class="bento-title">Progresión de Niveles MCER / DELE (A1 → C2)</h4>
+                  </div>
+                </div>
+                <p class="bento-text">
+                  Cambiar de nivel en la barra superior recalibra automáticamente el vocabulario, la extensión, el radar gramatical y la cadencia oral:
+                </p>
+                <div class="bento-compare-table">
+                  <div class="bento-compare-row bento-compare-head">
+                    <span>Nivel MCER</span>
+                    <span class="c1-col">Extensión y Párrafos</span>
+                    <span class="c2-col">Radar / Nota / Cadencia</span>
+                  </div>
+                  <div class="bento-compare-row">
+                    <span class="dim-name"><strong>A1 · Acceso</strong></span>
+                    <span class="c1-col">50–80 palabras (1–2 párr.)</span>
+                    <span class="c2-col">Mín. 2 estruct. · ≥60% · 90–120 PPM</span>
+                  </div>
+                  <div class="bento-compare-row">
+                    <span class="dim-name"><strong>A2 · Plataforma</strong></span>
+                    <span class="c1-col">90–130 palabras (2–3 párr.)</span>
+                    <span class="c2-col">Mín. 2 estruct. · ≥65% · 100–130 PPM</span>
+                  </div>
+                  <div class="bento-compare-row">
+                    <span class="dim-name"><strong>B1 · Umbral</strong></span>
+                    <span class="c1-col">140–180 palabras (3 párr.)</span>
+                    <span class="c2-col">Mín. 3 estruct. · ≥70% · 115–145 PPM</span>
+                  </div>
+                  <div class="bento-compare-row">
+                    <span class="dim-name"><strong>B2 · Avanzado</strong></span>
+                    <span class="c1-col">180–220 palabras (3–4 párr.)</span>
+                    <span class="c2-col">Mín. 3 estruct. · ≥72% · 125–155 PPM</span>
+                  </div>
+                  <div class="bento-compare-row">
+                    <span class="dim-name"><strong>C1 · Dominio</strong></span>
+                    <span class="c1-col">220–260 palabras (3–4 párr.)</span>
+                    <span class="c2-col">Mín. 4 estruct. · ≥75% · 130–160 PPM</span>
+                  </div>
+                  <div class="bento-compare-row">
+                    <span class="dim-name"><strong>C2 · Maestría</strong></span>
+                    <span class="c1-col">280–320 palabras (4–5 párr.)</span>
+                    <span class="c2-col">Mín. 6 estruct. · ≥85% · 135–165 PPM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 1 Footer Action: Proceed to Stage 2 -->
+        <div class="stage-footer-action">
+          <button id="proceedToStage2Btn" class="btn btn-primary stage-cta-btn">
+            <span>Continuar al Estudio de Escritura (Etapa 2)</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- STAGE 2: Writing & Evaluation Studio -->
+      <section class="stage-section stage-2-view glass-panel writing-studio" id="stage2Panel" aria-labelledby="writingStudioHeading" style="display: none;">
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <button id="backToStage1Btn" class="btn btn-secondary btn-sm stage-nav-back-btn" title="Volver a la Etapa 1: Guía y Criterios">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Etapa 1: Guía y Criterios</span>
+            </button>
+            <div class="panel-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+              <h2 id="writingStudioHeading">Etapa 2: Estudio de Escritura</h2>
+            </div>
+          </div>
+          <div class="panel-actions">
+            <button id="copyAiPromptBtn" class="btn btn-secondary btn-sm ai-prompt-btn"
+              title="Copiar un prompt de IA calibrado con las 10 palabras obligatorias para generar un ensayo modelo en ChatGPT/Claude/Gemini (Alt+P)"
+              aria-label="Copiar Prompt IA">
+              <svg class="ai-sparkle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+              </svg>
+              <span id="copyAiPromptBtnText">Prompt IA</span>
+            </button>
+            <button id="previewAiPromptBtn" class="btn btn-secondary btn-icon-only"
+              title="Inspeccionar y previsualizar el prompt de IA generado"
+              aria-label="Ver Prompt IA">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+            <button id="clearEssayBtn" class="btn btn-secondary btn-icon-only" title="Limpiar texto del editor" aria-label="Limpiar texto">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stage 2 Topic Bar & Navigation (Tree Architecture) -->
+        <div class="stage2-topic-card" id="stage2TopicCard">
+          <div class="stage2-topic-meta" style="display: none;">
+            <span class="meta-pill" id="topicCategory">Sociedad y Cultura</span>
+            <span class="meta-pill" id="topicTime">45 minutos</span>
+            <span class="meta-pill" id="topicType" style="display: none;">Ensayo MCER</span>
+          </div>
+
+          <!-- Tree Structure Architecture Header -->
+          <div class="stage2-topic-tree-bar">
+            <div class="topic-tree-hierarchy">
+
+              <!-- Row 1: Badge + Complexity + Root Subject + Difficulty selector + Draw buttons -->
+              <div class="tree-row tree-row-root">
+                <span class="topic-tree-badge" id="topicTreeBadge" title="Enfoque temático obligatorio generado por el árbol de temas">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  <span id="topicTreeBadgeText">Enfoque Obligatorio</span>
+                </span>
+
+                <span class="topic-complexity-badge tier-easy" id="topicComplexityBadge" title="Complejidad del Tema">Fácil</span>
+
+                <div class="tree-node tree-root" id="topicMainSubjectNode" title="Sujeto Principal (Raíz)">
+                  <span class="tree-node-label">Tema Raíz:</span>
+                  <span class="tree-node-val" id="topicMainSubjectText">Vida Cotidiana, Familia y Costumbres</span>
+                </div>
+
+                <!-- Difficulty selector and Draw buttons -->
+                <div class="stage2-topic-nav">
+                  <div class="topic-difficulty-selector" id="topicDifficultySelector">
+                    <button type="button" id="topicDifficultyBtn" class="btn btn-secondary btn-sm topic-difficulty-btn" title="Filtrar dificultad de los temas" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="diff-indicator-dot dot-all" id="diffIndicatorDot"></span>
+                      <span class="difficulty-label">Dificultad:</span>
+                      <span class="difficulty-current" id="topicDifficultyValue">Todas</span>
+                      <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="topic-difficulty-dropdown" id="topicDifficultyDropdown" role="listbox" aria-label="Seleccionar dificultad del tema">
+                      <button type="button" class="difficulty-option active" data-difficulty="all" role="option" aria-selected="true">
+                        <span class="diff-dot dot-all"></span>
+                        <div class="diff-text">
+                          <span class="diff-name">Todas</span>
+                          <span class="diff-desc">Fácil, Media y Difícil</span>
+                        </div>
+                      </button>
+                      <button type="button" class="difficulty-option" data-difficulty="easy" role="option" aria-selected="false">
+                        <span class="diff-dot dot-easy"></span>
+                        <div class="diff-text">
+                          <span class="diff-name">Fácil</span>
+                          <span class="diff-desc">Vida Cotidiana, Viajes y Costumbres</span>
+                        </div>
+                      </button>
+                      <button type="button" class="difficulty-option" data-difficulty="medium" role="option" aria-selected="false">
+                        <span class="diff-dot dot-medium"></span>
+                        <div class="diff-text">
+                          <span class="diff-name">Media</span>
+                          <span class="diff-desc">Educación, Trabajo y Sostenibilidad</span>
+                        </div>
+                      </button>
+                      <button type="button" class="difficulty-option" data-difficulty="hard" role="option" aria-selected="false">
+                        <span class="diff-dot dot-hard"></span>
+                        <div class="diff-text">
+                          <span class="diff-name">Difícil</span>
+                          <span class="diff-desc">Ética de IA, Geopolítica y Macroeconomía</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="topic-draw-buttons-group" id="topicDrawButtonsGroup">
+                    <button id="rerollTopicBtn" class="btn btn-secondary btn-sm reroll-topic-btn" title="Sortear Nuevo Tema General (Alt+T)" aria-label="Sortear Nuevo Tema">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                      </svg>
+                      <span>Nuevo Tema</span>
+                      <kbd class="hotkey-badge">Alt+T</kbd>
+                    </button>
+
+                    <button id="rerollTechTopicBtn" class="btn btn-secondary btn-sm reroll-topic-btn reroll-tech-btn" title="Sortear Tema de Tecnología e Ingeniería (Alt+K)" aria-label="Sortear Tema Tech">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                      </svg>
+                      <span>Tema Tech</span>
+                      <kbd class="hotkey-badge">Alt+K</kbd>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2: Sub-themes below root -->
+              <div class="tree-row tree-row-themes">
+                <span class="tree-row-indent" aria-hidden="true"></span>
+
+                <div class="tree-node tree-branch" id="topicSubTheme1Node" title="Subtema 1">
+                  <span class="tree-node-label">Subtema 1:</span>
+                  <span class="tree-node-val" id="topicSubTheme1Text">Rutinas Diarias</span>
+                </div>
+
+                <span class="tree-branch-amp" aria-hidden="true">&amp;</span>
+
+                <div class="tree-node tree-branch" id="topicSubTheme2Node" title="Subtema 2">
+                  <span class="tree-node-label">Subtema 2:</span>
+                  <span class="tree-node-val" id="topicSubTheme2Text">Convivencia Familiar</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Topic Title & Prompt Directive -->
+          <div class="stage2-topic-content">
+            <h3 class="topic-title" id="topicTitle">Vida Cotidiana, Familia y Costumbres</h3>
+            <span class="topic-preview-pill" id="writingTopicPill" style="display: none;">Vida Cotidiana</span>
+
+            <div class="topic-directive-box">
+              <span class="directive-marker">CONSIGNA DE REDACCIÓN:</span>
+              <p class="topic-directive-text" id="topicDirective">Desarrolle un texto coherente integrando el vocabulario obligatorio y las estructuras gramaticales de su nivel.</p>
+            </div>
+
+            <div class="topic-evaluation-note">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>La calificación evalúa las 10 palabras obligatorias, la extensión del nivel activo y las estructuras del radar sintáctico. Se reconocen conjugaciones y plurales.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2 Side-by-Side Workspace Layout -->
+        <div class="stage2-workspace-layout">
+          <!-- Left Side: Vocabulary Section -->
+          <div class="stage2-left-pane">
+            <div class="vocabulary-section">
+              <div class="section-subtitle">
+                <div class="vocab-subtitle-left">
+                  <span>Léxico Meta Obligatorio (<span id="vocabUsedCounter">0/10</span> Usadas)</span>
+                  <span class="vocab-structure-tag" style="display: none;">3 Verbos • 3 Sust. • 2 Adj. • 2 Adv.</span>
+                </div>
+                <div class="vocab-subtitle-right">
+                  <button id="rerollVocabBtn" class="btn btn-secondary btn-sm" title="Sortear 10 nuevas palabras obligatorias para este nivel">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="23 4 23 10 17 10"></polyline>
+                      <polyline points="1 20 1 14 7 14"></polyline>
+                      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    Renovar Léxico
+                  </button>
+                </div>
+              </div>
+
+              <div class="vocab-grid" id="vocabGrid">
+                <!-- Dynamically populated by app.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Toolbar, Radar & Editor -->
+          <div class="stage2-right-pane">
+            <div class="stage2-lexis-dock" id="stage2LexisDock" style="display: none;">
+              <strong id="stage2VocabCountDisplay">0/10</strong>
+              <div id="stage2VocabChips"></div>
+            </div>
+
+            <!-- Live Toolbar -->
+            <div class="editor-toolbar">
+              <div class="editor-metrics-live">
+                <div class="metric-live-item">
+                  <svg class="metric-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                  <span>Palabras:</span>
+                  <span class="metric-live-val" id="liveWordCount">0</span>
+                  <span id="targetWordCountHint" class="metric-target-hint">(220–260 ±5 meta)</span>
+                </div>
+                <div class="metric-live-item">
+                  <svg class="metric-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="21" y1="10" x2="3" y2="10"></line>
+                    <line x1="21" y1="6" x2="3" y2="6"></line>
+                    <line x1="21" y1="14" x2="3" y2="14"></line>
+                    <line x1="21" y1="18" x2="7" y2="18"></line>
+                  </svg>
+                  <span>Párrafos:</span>
+                  <span class="metric-live-val" id="liveParaCount">0</span>
+                  <span id="targetParaCountHint" class="metric-target-hint">(3–4 meta)</span>
+                </div>
+              </div>
+              <div id="lengthGuidanceBadge" class="radar-badge">
+                Esperando texto
+              </div>
+            </div>
+
+            <!-- Real-time Spanish Grammar & Syntax Radar -->
+            <div class="live-radar-box">
+              <div class="radar-header">
+                <span>Radar Gramatical y Sintáctico (MCER / DELE)</span>
+                <span id="radarCountDisplay" class="radar-count-badge zero">0/4 Estructuras Requeridas (C1)</span>
+              </div>
+              <div class="radar-badges-row" id="radarBadgesRow">
+                <span class="radar-badge-empty">Escribe estructuras propias de tu nivel (p. ej. Subjuntivo «es fundamental que...», Contraargumentación «sin embargo...», Impersonalidad «cabe destacar...») para activar el radar.</span>
+              </div>
+            </div>
+
+            <!-- Spanish Orthographic Quick-Insert Toolbar -->
+            <div class="spanish-accent-toolbar" id="spanishAccentToolbar" aria-label="Barra de caracteres y tildes del español">
+              <span class="spanish-accent-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 7V4h16v3M9 20h6M12 4v16"></path>
+                </svg>
+                <span>Tildes y Signos:</span>
+              </span>
+              <div class="spanish-accent-buttons">
+                <button type="button" class="accent-char-btn" data-char="á" title="Insertar á">á</button>
+                <button type="button" class="accent-char-btn" data-char="é" title="Insertar é">é</button>
+                <button type="button" class="accent-char-btn" data-char="í" title="Insertar í">í</button>
+                <button type="button" class="accent-char-btn" data-char="ó" title="Insertar ó">ó</button>
+                <button type="button" class="accent-char-btn" data-char="ú" title="Insertar ú">ú</button>
+                <button type="button" class="accent-char-btn" data-char="ü" title="Insertar ü">ü</button>
+                <button type="button" class="accent-char-btn" data-char="ñ" title="Insertar ñ">ñ</button>
+                <button type="button" class="accent-char-btn" data-char="Ñ" title="Insertar Ñ">Ñ</button>
+                <button type="button" class="accent-char-btn" data-char="¿" title="Insertar ¿">¿</button>
+                <button type="button" class="accent-char-btn" data-char="¡" title="Insertar ¡">¡</button>
+                <button type="button" class="accent-char-btn" data-char="«" title="Insertar «">«</button>
+                <button type="button" class="accent-char-btn" data-char="»" title="Insertar »">»</button>
+              </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="editor-wrapper">
+              <textarea id="essayInput" class="essay-textarea"
+                placeholder="Redacta aquí tu texto en español... Incorpora las 10 palabras del léxico obligatorio que aparecen a la izquierda."
+                spellcheck="true" lang="es"></textarea>
+            </div>
+
+            <!-- Submit Evaluation Button -->
+            <button id="evaluateEssayBtn" class="btn btn-primary btn-locked-lexis" style="width: 100%; padding: 14px; font-size: 17.5px;"
+              title="Incorpora las 10 palabras obligatorias y las estructuras del radar para desbloquear la evaluación"
+              aria-disabled="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              Evaluar Texto (0/10 Léxico • 0/4 Sintaxis)
+              <kbd class="hotkey-badge">Ctrl+↵</kbd>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 3: Speaking & Pronunciation Studio -->
+      <section class="stage-section stage-3-view glass-panel speaking-studio" id="speakingStudio" aria-labelledby="speakingStudioHeading" style="display: none;">
+        <div class="teleprompter-container">
+          <div class="teleprompter-header">
+            <div class="panel-header-left">
+              <button id="returnToWritingBtn" class="btn btn-secondary btn-sm stage-nav-back-btn" style="font-size: 14px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Etapa 2: Estudio de Escritura</span>
+              </button>
+              <div class="panel-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="2">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="23"></line>
+                  <line x1="8" y1="23" x2="16" y2="23"></line>
+                </svg>
+                <h2 id="speakingStudioHeading">Etapa 3: Evaluación de Habla y Pronunciación</h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chrome file:// Protocol Permanent Permission Notice -->
+          <div id="chromeOriginNotice" class="chrome-origin-notice" style="display: none;">
+            <div class="origin-notice-content">
+              <svg class="origin-notice-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <div class="origin-notice-text">
+                <strong>Aviso de Permisos en Google Chrome:</strong> Estás abriendo FluentEdge mediante <code>file://</code>. Abre la aplicación desde el servidor local para conservar el permiso del micrófono con un solo clic:
+              </div>
+              <a href="http://localhost:8080/" class="btn btn-emerald btn-sm origin-notice-btn">
+                Abrir http://localhost:8080 →
+              </a>
+            </div>
+          </div>
+
+          <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 16px;">
+            Lee tu texto en español en voz alta frente al micrófono. Nuestro motor de reconocimiento fonético alinea tus palabras en tiempo real para evaluar tu <strong>precisión articulatoria</strong>, <strong>acentuación tónica</strong> y <strong>cadencia oral</strong> según el estándar oficial MCER / DELE de tu nivel activo.
+          </p>
+
+          <!-- Teleprompter Karaoke Display -->
+          <div class="teleprompter-text" id="teleprompterText">
+            <!-- Populated with span.teleprompter-word elements -->
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="speaking-controls-bar" style="margin-top: 20px;">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <!-- Start/Stop Recording -->
+              <button id="startSpeakingBtn" class="btn btn-emerald">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 14 14"></polyline>
+                </svg>
+                Comenzar Lectura en Voz Alta
+              </button>
+              <button id="stopSpeakingBtn" class="btn btn-crimson" style="display: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="6" width="12" height="12"></rect>
+                </svg>
+                Finalizar y Evaluar Pronunciación
+              </button>
+
+              <!-- Retry Speaking -->
+              <button id="retrySpeakingBtn" class="btn btn-secondary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path></svg>
+                Grabar Nuevo Intento
+              </button>
+
+              <!-- Native Model Audio Playback -->
+              <button id="playModelAudioBtn" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <span id="playModelAudioBtnText">Escuchar Voz Modelo (Elena · 🇦🇷)</span>
+              </button>
+              <button id="stopModelAudioBtn" class="btn btn-secondary" style="display: none;">
+                Detener Audio
+              </button>
+            </div>
+
+            <!-- Canvas Audio Waveform Visualizer -->
+            <canvas id="visualizerCanvas" class="visualizer-canvas" width="280" height="52"></canvas>
+
+            <!-- Live Metrics during speech -->
+            <div class="speaking-live-metrics">
+              <div class="live-speaking-stat">
+                <div class="val" id="liveSpeakingWpm">0</div>
+                <div class="lbl">Palabras / Min</div>
+              </div>
+              <div class="live-speaking-stat">
+                <div class="val" id="liveSpeakingAcc">0%</div>
+                <div class="lbl">Pronunciación</div>
+              </div>
+              <div class="live-speaking-stat">
+                <div class="val" id="liveSpeakingTime">00:00</div>
+                <div class="lbl">Duración</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div style="display: flex; gap: 16px; font-size: 14px; color: var(--text-secondary); margin-top: 10px; flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="width: 12px; height: 12px; background: rgba(16, 185, 129, 0.4); border: 1px solid var(--emerald); border-radius: 2px;"></span>
+              Pronunciación Precisa
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="width: 12px; height: 12px; background: rgba(245, 158, 11, 0.4); border: 1px solid var(--amber); border-radius: 2px;"></span>
+              Variación / Vacilación Leve
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="width: 12px; height: 12px; background: rgba(244, 63, 94, 0.3); border: 1px solid var(--crimson); border-radius: 2px;"></span>
+              Omitida / Por Practicar
+            </span>
+            <span id="speakingVoiceTip" style="margin-left: auto; font-style: italic; color: var(--gold-light);">
+              Consejo: Haz clic en cualquier palabra para escuchar su pronunciación con <span id="speakingVoiceTipName">Elena (🇦🇷)</span>.
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Speaking Evaluation Results -->
+        <div id="speakingReportPanel" class="speaking-results-panel" style="display: none;">
+          <!-- Dynamically rendered -->
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- MCER / DELE Writing Assessment Modal / Gatekeeper -->
+  <div class="modal-backdrop" id="evalModalBackdrop">
+    <div class="modal-dialog">
+      <div class="eval-header">
+        <div style="font-size: 14px; text-transform: uppercase; color: var(--gold-primary); letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px;">
+          Informe Oficial de Evaluación Escrita MCER / DELE
+        </div>
+        <h2>Evaluación de Escritura · FluentEdge Español Perfecto</h2>
+        <button id="closeEvalModalBtn" class="btn btn-secondary btn-icon-only" style="position: absolute; right: 0; top: 0;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Band Summary Card -->
+      <div class="eval-summary-card">
+        <div class="band-score-circle">
+          <div class="score-big" id="evalScoreTotal">17.0</div>
+          <div class="score-sub">de 20 (<span id="evalPercentage">85%</span>)</div>
+        </div>
+        <div>
+          <div class="cefr-verdict-title" id="evalVerdictTitle">Apto · Nivel MCER C1</div>
+          <p class="cefr-verdict-desc" id="evalVerdictDesc">
+            Cumple satisfactoriamente los requisitos del nivel seleccionado en contenido, registro, cohesión y riqueza léxica.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 Scales Grid -->
+      <div class="scales-grid">
+        <div class="scale-card">
+          <div class="scale-card-header">
+            <span class="scale-name">1. Contenido y Extensión</span>
+            <span class="scale-score-pill" id="scaleContentScore">4.5 / 5</span>
+          </div>
+          <ul class="scale-feedback-list" id="scaleContentFeedback"></ul>
+        </div>
+
+        <div class="scale-card">
+          <div class="scale-card-header">
+            <span class="scale-name">2. Adecuación y Registro</span>
+            <span class="scale-score-pill" id="scaleCommScore">4.5 / 5</span>
+          </div>
+          <ul class="scale-feedback-list" id="scaleCommFeedback"></ul>
+        </div>
+
+        <div class="scale-card">
+          <div class="scale-card-header">
+            <span class="scale-name">3. Cohesión y Organización</span>
+            <span class="scale-score-pill" id="scaleOrgScore">4.0 / 5</span>
+          </div>
+          <ul class="scale-feedback-list" id="scaleOrgFeedback"></ul>
+        </div>
+
+        <div class="scale-card">
+          <div class="scale-card-header">
+            <span class="scale-name">4. Léxico y Gramática</span>
+            <span class="scale-score-pill" id="scaleLangScore">4.0 / 5</span>
+          </div>
+          <ul class="scale-feedback-list" id="scaleLangFeedback"></ul>
+        </div>
+      </div>
+
+      <!-- Gatekeeper Action Banner -->
+      <div class="gatekeeper-banner" id="gatekeeperBanner">
+        <div class="gatekeeper-info">
+          <h3 id="gatekeeperHeading">Umbral del Nivel Alcanzado</h3>
+          <p id="gatekeeperSubtext">Has desbloqueado la Etapa 3: Evaluación de Habla y Pronunciación.</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button id="gatekeeperActionBtn" class="btn btn-emerald">
+            Avanzar a la Etapa de Habla →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Front-and-Center Evaluation Requirements Alert Modal -->
+  <div class="req-alert-backdrop" id="reqAlertBackdrop" role="alertdialog" aria-modal="true" aria-labelledby="reqAlertTitle" style="display: none;">
+    <div class="req-alert-card" id="reqAlertCard">
+      <button id="closeReqAlertBtn" class="btn btn-secondary btn-icon-only req-alert-close" aria-label="Cerrar alerta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="req-alert-icon-wrapper">
+        <svg class="req-alert-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+
+      <div class="req-alert-header">
+        <div class="req-alert-pill" id="reqAlertPill">Requisitos Incompletos</div>
+        <h3 class="req-alert-title" id="reqAlertTitle">Evaluación Bloqueada</h3>
+        <p class="req-alert-desc" id="reqAlertDesc">
+          Tu borrador debe cumplir los siguientes requisitos del nivel seleccionado antes de pasar a la evaluación:
+        </p>
+      </div>
+
+      <div class="req-alert-body" id="reqAlertBody">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="req-alert-footer">
+        <button id="reqAlertActionBtn" class="btn btn-primary req-alert-btn">
+          <span>Volver al Editor y Continuar Escribiendo</span>
+          <kbd class="hotkey-badge">Esc</kbd>
+        </button>
+        <button id="reqAlertCopyAiBtn" class="btn btn-secondary req-alert-ai-btn"
+          title="Copiar prompt de IA con las 10 palabras obligatorias para generar un ensayo modelo en ChatGPT/Claude/Gemini">
+          <svg class="ai-sparkle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+          </svg>
+          <span id="reqAlertCopyAiBtnText">Generar con IA (Copiar Prompt)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Generated Essay Prompt Modal -->
+  <div class="ai-prompt-backdrop" id="aiPromptModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="aiPromptModalTitle" style="display: none;">
+    <div class="ai-prompt-card" id="aiPromptModalCard">
+      <button id="closeAiPromptModalBtn" class="btn btn-secondary btn-icon-only ai-prompt-close" aria-label="Cerrar modal de prompt IA">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="ai-prompt-icon-wrapper">
+        <svg class="ai-sparkle-icon-large" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+        </svg>
+      </div>
+
+      <div class="ai-prompt-header">
+        <div class="ai-prompt-badge-row">
+          <span class="ai-prompt-pill" id="aiPromptLevelBadge">PROMPT NIVEL C1</span>
+          <span class="ai-prompt-words-pill" id="aiPromptWordTargetBadge">Meta: 220–260 Palabras</span>
+          <span class="ai-prompt-focus-pill" id="aiPromptFocusBadge" style="display: none;"></span>
+        </div>
+        <h3 class="ai-prompt-title" id="aiPromptModalTitle">Generador de Prompt IA (MCER / DELE)</h3>
+        <p class="ai-prompt-desc">
+          Calibrado para <strong>ChatGPT</strong>, <strong>Claude</strong> o <strong>Gemini</strong>. Inyecta las 10 palabras obligatorias, la extensión exacta y las estructuras del radar sintáctico para tu nivel activo.
+        </p>
+      </div>
+
+      <div class="ai-prompt-vocab-box">
+        <div class="ai-prompt-vocab-heading">
+          <span>Léxico Obligatorio Inyectado (10/10)</span>
+          <span class="ai-prompt-vocab-count" id="aiPromptVocabCount">10 palabras</span>
+        </div>
+        <div class="ai-prompt-vocab-chips" id="aiPromptVocabChips">
+          <!-- Dynamically populated chips -->
+        </div>
+      </div>
+
+      <div class="ai-prompt-preview-wrap">
+        <div class="ai-prompt-preview-bar">
+          <span class="preview-label">Instrucción Lista para Copiar</span>
+          <button id="copyPromptInsideModalBtn" class="btn btn-secondary btn-sm" style="font-size: 13px; padding: 4px 10px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="modalCopyBtnText">Copiar Prompt</span>
+          </button>
+        </div>
+        <textarea id="aiPromptTextarea" class="ai-prompt-textarea" readonly spellcheck="false"></textarea>
+      </div>
+
+      <div class="ai-prompt-steps-row">
+        <div class="ai-prompt-step">
+          <span class="ai-step-idx">1</span>
+          <span class="ai-step-txt">Copia el prompt</span>
+        </div>
+        <span class="ai-step-div">›</span>
+        <div class="ai-prompt-step">
+          <span class="ai-step-idx">2</span>
+          <span class="ai-step-txt">Pégalo en tu IA</span>
+        </div>
+        <span class="ai-step-div">›</span>
+        <div class="ai-prompt-step">
+          <span class="ai-step-idx">3</span>
+          <span class="ai-step-txt">Pega el texto aquí</span>
+        </div>
+        <span class="ai-step-div">›</span>
+        <div class="ai-prompt-step">
+          <span class="ai-step-idx">4</span>
+          <span class="ai-step-txt">Evalúa y Habla</span>
+        </div>
+      </div>
+
+      <div class="ai-prompt-footer">
+        <button id="primaryCopyAiPromptBtn" class="btn btn-primary ai-copy-action-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span id="primaryCopyBtnLabel">Copiar Prompt al Portapapeles</span>
+          <kbd class="hotkey-badge">Enter</kbd>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Individual Word Practice (Repeat-After-Me Drill) Modal -->
+  <div class="word-practice-backdrop" id="wordPracticeModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="wordPracticeModalTitle" style="display: none;">
+    <div class="word-practice-card" id="wordPracticeModalCard">
+      <button id="closeWordPracticeModalBtn" class="btn btn-secondary btn-icon-only word-practice-close" aria-label="Cerrar práctica de pronunciación">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Header -->
+      <div class="word-practice-header">
+        <div class="word-practice-badge-row">
+          <span class="word-practice-pill" id="wordPracticePill">TALLER: REPITE DESPUÉS DE MÍ</span>
+          <span class="word-practice-step-pill" id="wordPracticeStepPill">Palabra 1 de 3</span>
+        </div>
+        <h3 class="word-practice-title" id="wordPracticeModalTitle">Práctica Fonética y Sílaba Tónica</h3>
+        <p class="word-practice-desc">
+          Perfecciona la articulación vocálica y el acento prosódico (agudas, llanas y esdrújulas) con el modelo nativo.
+        </p>
+      </div>
+
+      <!-- Target Word Showcase Card -->
+      <div class="word-practice-showcase">
+        <div class="word-practice-target-row">
+          <span class="word-practice-target-word" id="wordPracticeTargetWord">imprescindible</span>
+          <span class="word-practice-pos-badge" id="wordPracticePosBadge">adjetivo · B2</span>
+        </div>
+        <div class="word-practice-syllable-wrap">
+          <span class="word-practice-syllable-label">División Silábica y Sílaba Tónica:</span>
+          <div class="word-practice-syllables" id="wordPracticeSyllables">
+            <span>im</span> · <span>pres</span> · <span>cin</span> · <span class="syllable-stressed">DI</span> · <span>ble</span>
+          </div>
+        </div>
+        <div class="word-practice-def-box" id="wordPracticeDefBox">
+          <span class="word-practice-def-text" id="wordPracticeDefText">De tal grado de necesidad que no se puede prescindir de ello.</span>
+        </div>
+      </div>
+
+      <!-- Native Model Pronunciation Section -->
+      <div class="word-practice-model-strip">
+        <button id="wordPracticePlayModelBtn" class="btn btn-secondary word-practice-model-btn" title="Escuchar pronunciación de la voz modelo">
+          <svg class="model-speaker-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <span id="wordPracticeModelBtnLabel">Escuchar Voz Modelo</span>
+        </button>
+
+        <div class="word-practice-speed-toggle">
+          <span class="speed-toggle-label">Velocidad:</span>
+          <button type="button" id="wordPracticeSpeedSlowBtn" class="word-speed-pill" data-speed="0.7">0.7×</button>
+          <button type="button" id="wordPracticeSpeedNormalBtn" class="word-speed-pill active" data-speed="0.88">0.88×</button>
+        </div>
+
+        <span class="word-practice-voice-tag" id="wordPracticeVoiceTag">Voz Modelo</span>
+      </div>
+
+      <!-- Interactive Microphone Drill Section -->
+      <div class="word-practice-drill-box">
+        <button type="button" id="wordPracticeMicBtn" class="word-practice-mic-btn" aria-label="Pulsa para hablar y grabar tu pronunciación">
+          <div class="mic-ripple-ring ring-1"></div>
+          <div class="mic-ripple-ring ring-2"></div>
+          <div class="mic-inner-circle">
+            <svg class="mic-main-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </div>
+        </button>
+        <div class="word-practice-mic-status">
+          <div class="word-practice-status-label" id="wordPracticeMicStatusLabel">Pulsa para Hablar (Repite Después de Mí)</div>
+          <div class="word-practice-status-hint" id="wordPracticeMicStatusHint">Escucha el modelo arriba y pronuncia la palabra con claridad frente al micrófono</div>
+        </div>
+      </div>
+
+      <!-- Real-Time Evaluation Feedback Card -->
+      <div class="word-practice-eval-card" id="wordPracticeEvalCard">
+        <div class="word-practice-eval-header">
+          <div class="word-practice-match-row">
+            <span class="match-caption">Precisión Articulatoria:</span>
+            <span class="word-practice-score-badge status-awaiting" id="wordPracticeScoreBadge">Esperando Intento</span>
+          </div>
+          <div class="word-practice-score-pct" id="wordPracticeScorePct">--%</div>
+        </div>
+
+        <!-- Meter Track -->
+        <div class="word-practice-meter-track">
+          <div class="word-practice-meter-fill" id="wordPracticeMeterFill" style="width: 0%;"></div>
+        </div>
+
+        <!-- Phonation Transcript -->
+        <div class="word-practice-transcript-row">
+          <div class="transcript-col">
+            <span class="transcript-col-label">Palabra Meta:</span>
+            <span class="transcript-target-word" id="wordPracticeTargetDisplay">imprescindible</span>
+          </div>
+          <div class="transcript-col">
+            <span class="transcript-col-label">Tu Pronunciación:</span>
+            <span class="transcript-spoken-word" id="wordPracticeSpokenDisplay">—</span>
+          </div>
+        </div>
+
+        <!-- Diagnostic Feedback Tip -->
+        <div class="word-practice-tip-box" id="wordPracticeTipBox">
+          <svg class="tip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span class="word-practice-feedback-text" id="wordPracticeFeedbackText">
+            Haz clic en «Escuchar Voz Modelo» para percibir la sílaba tónica y luego pulsa el micrófono.
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation & Summary Footer -->
+      <div class="word-practice-footer">
+        <button type="button" id="wordPracticePrevBtn" class="btn btn-secondary word-practice-nav-btn" disabled>
+          ← Anterior
+        </button>
+
+        <div class="word-practice-summary-status">
+          <span id="wordPracticeMasteredSummary">0 de 3 Dominadas</span>
+        </div>
+
+        <button type="button" id="wordPracticeNextBtn" class="btn btn-primary word-practice-nav-btn">
+          <span>Siguiente Palabra →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Script (Self-contained bundle, works with file:// and http://) -->
+  <script src="js/bundle.js?v=20261105-es2"></script>
+</body>
+
+</html>
+
