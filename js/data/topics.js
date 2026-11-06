@@ -375,15 +375,15 @@ function buildLevelDirective(subject, theme1, theme2, tension, scope, stakeholde
     return `Elabore un ensayo discursivo de alta precisión conceptual (280–320 palabras) que sintetice la tensión dialéctica entre «${theme1.name}» y «${theme2.name}» dentro de «${subject.name}». Dilucide cómo repercute ${tension.name} ${scope.name}, formulando una tesis matizada sobre la responsabilidad de ${stakeholder.name}.`;
 }
 
-export function generateTopicFromTree(subjectId, theme1Id, theme2Id, level = 'C1', difficulty = 'all') {
+export function generateTopicFromTree(subjectId, theme1Id, theme2Id, level = 'C1', difficulty = 'all', options = {}) {
     const subject = MAIN_SUBJECTS.find(s => s.id === subjectId) || MAIN_SUBJECTS[0];
     const themes = SUB_THEMES[subject.id] || [];
     const theme1 = themes.find(t => t.id === theme1Id) || themes[0];
     const theme2 = themes.find(t => t.id === theme2Id && t.id !== theme1.id) || themes[1] || themes[0];
 
-    const tension = randomChoice(TENSIONS);
-    const scope = randomChoice(SCOPES);
-    const stakeholder = randomChoice(STAKEHOLDERS);
+    const tension = options.tension || (options.deterministic ? TENSIONS[1] : randomChoice(TENSIONS));
+    const scope = options.scope || (options.deterministic ? SCOPES[0] : randomChoice(SCOPES));
+    const stakeholder = options.stakeholder || (options.deterministic ? STAKEHOLDERS[0] : randomChoice(STAKEHOLDERS));
     const normLevel = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].includes(String(level).toUpperCase())
         ? String(level).toUpperCase()
         : 'C1';
@@ -408,6 +408,9 @@ export function generateTopicFromTree(subjectId, theme1Id, theme2Id, level = 'C1
         theme1Name: theme1.name,
         theme2Id: theme2.id,
         theme2Name: theme2.name,
+        tension,
+        scope,
+        stakeholder,
         tensionName: tension.name,
         scopeName: scope.name,
         stakeholderName: stakeholder.name,
@@ -422,12 +425,16 @@ export function generateTopicFromTree(subjectId, theme1Id, theme2Id, level = 'C1
     };
 }
 
-export function generateRandomTreeTopic(level = 'C1', difficulty = 'all') {
+export function generateRandomTreeTopic(level = 'C1', difficulty = 'all', excludeSubjectId = null) {
     const normDiff = String(difficulty || 'all').toLowerCase();
     let pool = MAIN_SUBJECTS;
     if (normDiff === 'easy' || normDiff === 'medium' || normDiff === 'hard') {
         const filtered = MAIN_SUBJECTS.filter(s => s.difficulty === normDiff);
         if (filtered.length > 0) pool = filtered;
+    }
+    if (excludeSubjectId && pool.length > 1) {
+        const withoutCurrent = pool.filter(s => s.id !== excludeSubjectId);
+        if (withoutCurrent.length > 0) pool = withoutCurrent;
     }
 
     const subject = randomChoice(pool);
@@ -439,27 +446,31 @@ export function generateRandomTreeTopic(level = 'C1', difficulty = 'all') {
     return generateTopicFromTree(subject.id, theme1.id, theme2.id, level, subject.difficulty);
 }
 
-export function getDefaultStartingTopic(level = 'C1', difficulty = 'all') {
+/**
+ * Always returns the exact same fixed starting General Topic (Nuevo Tema) when the page is loaded for the first time,
+ * regardless of the active level (A1–C2).
+ */
+export function getDefaultStartingTopic(level = 'C1') {
     const normLevel = String(level || 'C1').toUpperCase();
-    if (normLevel === 'A1' || normLevel === 'A2') {
-        return generateTopicFromTree('vida_cotidiana_familia', 'habitos_diarios', 'convivencia_familiar', normLevel, 'easy');
-    }
-    if (normLevel === 'B1' || normLevel === 'B2') {
-        return generateTopicFromTree('educacion_aprendizaje', 'pensamiento_critico', 'herramientas_digitales_aula', normLevel, 'medium');
-    }
-    return generateTopicFromTree('inteligencia_artificial_etica', 'soberania_cognitiva', 'sesgos_algoritmicos', normLevel, 'hard');
+    return generateTopicFromTree(
+        'vida_cotidiana_familia',
+        'habitos_diarios',
+        'convivencia_familiar',
+        normLevel,
+        'easy',
+        { deterministic: true }
+    );
 }
 
-export function generateRandomTechTreeTopic(level = 'C1', difficulty = 'all') {
-    const subject = randomChoice(TECH_MAIN_SUBJECTS);
+export function generateTechTopicFromTree(subjectId, theme1Id, theme2Id, level = 'C1', difficulty = 'all', options = {}) {
+    const subject = TECH_MAIN_SUBJECTS.find(s => s.id === subjectId) || TECH_MAIN_SUBJECTS[0];
     const themes = TECH_SUB_THEMES[subject.id] || [];
-    const theme1 = randomChoice(themes);
-    const remaining = themes.filter(t => t.id !== theme1.id);
-    const theme2 = remaining.length > 0 ? randomChoice(remaining) : theme1;
+    const theme1 = themes.find(t => t.id === theme1Id) || themes[0];
+    const theme2 = themes.find(t => t.id === theme2Id && t.id !== theme1.id) || themes[1] || themes[0];
 
-    const tension = randomChoice(TENSIONS);
-    const scope = { id: 'ambito_tech', name: 'en los equipos de desarrollo de software y tecnología actuales' };
-    const stakeholder = { id: 'ingenieros_usuarios', name: 'los ingenieros, los líderes técnicos y los usuarios finales' };
+    const tension = options.tension || (options.deterministic ? TENSIONS[2] : randomChoice(TENSIONS));
+    const scope = options.scope || { id: 'ambito_tech', name: 'en los equipos de desarrollo de software y tecnología actuales' };
+    const stakeholder = options.stakeholder || { id: 'ingenieros_usuarios', name: 'los ingenieros, los líderes técnicos y los usuarios finales' };
     const normLevel = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].includes(String(level).toUpperCase())
         ? String(level).toUpperCase()
         : 'C1';
@@ -484,6 +495,9 @@ export function generateRandomTechTreeTopic(level = 'C1', difficulty = 'all') {
         theme1Name: theme1.name,
         theme2Id: theme2.id,
         theme2Name: theme2.name,
+        tension,
+        scope,
+        stakeholder,
         tensionName: tension.name,
         scopeName: scope.name,
         stakeholderName: stakeholder.name,
@@ -496,6 +510,42 @@ export function generateRandomTechTreeTopic(level = 'C1', difficulty = 'all') {
         keywords: combinedKeywords,
         isTechTopic: true
     };
+}
+
+/**
+ * Always returns the exact same fixed starting Tech Topic (Tema Tech) the first time Tech Mode is selected.
+ */
+export function getDefaultTechStartingTopic(level = 'C1') {
+    const normLevel = String(level || 'C1').toUpperCase();
+    return generateTechTopicFromTree(
+        'liderazgo_equipos_remotos',
+        'reuniones_vs_trabajo_profundo',
+        'mentorias_desarrollo_talento',
+        normLevel,
+        'easy',
+        { deterministic: true }
+    );
+}
+
+export function generateRandomTechTreeTopic(level = 'C1', difficulty = 'all', excludeSubjectId = null) {
+    const normDiff = String(difficulty || 'all').toLowerCase();
+    let pool = TECH_MAIN_SUBJECTS;
+    if (normDiff === 'easy' || normDiff === 'medium' || normDiff === 'hard') {
+        const filtered = TECH_MAIN_SUBJECTS.filter(s => s.difficulty === normDiff);
+        if (filtered.length > 0) pool = filtered;
+    }
+    if (excludeSubjectId && pool.length > 1) {
+        const withoutCurrent = pool.filter(s => s.id !== excludeSubjectId);
+        if (withoutCurrent.length > 0) pool = withoutCurrent;
+    }
+
+    const subject = randomChoice(pool);
+    const themes = TECH_SUB_THEMES[subject.id] || [];
+    const theme1 = randomChoice(themes);
+    const remaining = themes.filter(t => t.id !== theme1.id);
+    const theme2 = remaining.length > 0 ? randomChoice(remaining) : theme1;
+
+    return generateTechTopicFromTree(subject.id, theme1.id, theme2.id, level, subject.difficulty);
 }
 
 /**

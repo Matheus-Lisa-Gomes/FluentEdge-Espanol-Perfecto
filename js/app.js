@@ -2,7 +2,7 @@
  * FluentEdge: Español Perfecto (A1–C2 MCER / DELE) - Main Application Controller
  */
 
-import { MAIN_SUBJECTS, SUB_THEMES, generateRandomTreeTopic, generateTopicFromTree, getDefaultStartingTopic, checkTopicAdherence, generateRandomTechTreeTopic, TECH_MAIN_SUBJECTS, TECH_SUB_THEMES, CEFR_DESCRIPTORS } from './data/topics.js';
+import { MAIN_SUBJECTS, SUB_THEMES, generateRandomTreeTopic, generateTopicFromTree, getDefaultStartingTopic, getDefaultTechStartingTopic, generateTechTopicFromTree, checkTopicAdherence, generateRandomTechTreeTopic, TECH_MAIN_SUBJECTS, TECH_SUB_THEMES, CEFR_DESCRIPTORS } from './data/topics.js';
 import { getRandomVocabularySet, getRandomSingleVocabularyWord, VOCABULARY_LEXICON } from './data/vocabulary.js';
 import { analyzeQuickMetrics, evaluateEssay, checkTargetWordUsage, generateAiEssayPrompt, LEVEL_SPECS, getLevelSpec } from './modules/evaluator.js';
 import { SpeechEngine, SPEAKING_CADENCE_BY_LEVEL } from './modules/speech.js';
@@ -25,7 +25,8 @@ class FluentEdgeApp {
         } catch (_) {}
 
         this.hasDrawnTopic = false;
-        this.currentTopic = getDefaultStartingTopic(this.targetLevel, this.topicDifficulty);
+        this.hasDrawnTechTopic = false;
+        this.currentTopic = getDefaultStartingTopic(this.targetLevel);
 
         this.activeVocabulary = [];
         this.speechEngine = new SpeechEngine();
@@ -715,15 +716,33 @@ class FluentEdgeApp {
                 : `(${spec.minParagraphs}–${spec.maxParagraphs} meta)`;
         }
 
-        // Update current topic directive for the newly chosen level
-        if (this.currentTopic && !this.currentTopic.isTechTopic) {
-            this.currentTopic = generateTopicFromTree(
-                this.currentTopic.subjectId,
-                this.currentTopic.theme1Id,
-                this.currentTopic.theme2Id,
-                normLevel,
-                this.currentTopic.difficulty
-            );
+        // Update current topic directive for the newly chosen level while preserving the exact same theme, sub-themes, tension, scope, and stakeholder
+        if (this.currentTopic) {
+            const preservedOptions = {
+                tension: this.currentTopic.tension,
+                scope: this.currentTopic.scope,
+                stakeholder: this.currentTopic.stakeholder,
+                deterministic: true
+            };
+            if (this.currentTopic.isTechTopic) {
+                this.currentTopic = generateTechTopicFromTree(
+                    this.currentTopic.subjectId,
+                    this.currentTopic.theme1Id,
+                    this.currentTopic.theme2Id,
+                    normLevel,
+                    this.currentTopic.difficulty,
+                    preservedOptions
+                );
+            } else {
+                this.currentTopic = generateTopicFromTree(
+                    this.currentTopic.subjectId,
+                    this.currentTopic.theme1Id,
+                    this.currentTopic.theme2Id,
+                    normLevel,
+                    this.currentTopic.difficulty,
+                    preservedOptions
+                );
+            }
             if (this.dom.topicDirective) {
                 this.dom.topicDirective.textContent = this.currentTopic.directive;
             }
@@ -943,21 +962,38 @@ class FluentEdgeApp {
         }
 
         if (reroll) {
-            this.rerollTopic();
+            if (this.currentTopic?.isTechTopic) {
+                this.rerollTechTopic(true);
+            } else {
+                this.rerollTopic(true);
+            }
         }
     }
 
-    rerollTopic() {
-        this.hasDrawnTopic = true;
-        const newTopic = generateRandomTreeTopic(this.targetLevel, this.topicDifficulty);
+    rerollTopic(forceRandom = false) {
+        let newTopic;
+        if (!forceRandom && this.currentTopic?.isTechTopic && !this.hasDrawnTopic) {
+            newTopic = getDefaultStartingTopic(this.targetLevel);
+        } else {
+            this.hasDrawnTopic = true;
+            const excludeId = !this.currentTopic?.isTechTopic ? this.currentTopic?.subjectId : null;
+            newTopic = generateRandomTreeTopic(this.targetLevel, this.topicDifficulty, excludeId);
+        }
         this.currentTopic = newTopic;
         if (this.dom.essayInput) this.dom.essayInput.value = '';
         this.loadTopic(newTopic);
     }
 
-    rerollTechTopic() {
-        this.hasDrawnTopic = true;
-        const newTopic = generateRandomTechTreeTopic(this.targetLevel, this.topicDifficulty);
+    rerollTechTopic(forceRandom = false) {
+        let newTopic;
+        if (!forceRandom && !this.hasDrawnTechTopic) {
+            this.hasDrawnTechTopic = true;
+            newTopic = getDefaultTechStartingTopic(this.targetLevel);
+        } else {
+            this.hasDrawnTechTopic = true;
+            const excludeId = this.currentTopic?.isTechTopic ? this.currentTopic?.subjectId : null;
+            newTopic = generateRandomTechTreeTopic(this.targetLevel, this.topicDifficulty, excludeId);
+        }
         this.currentTopic = newTopic;
         if (this.dom.essayInput) this.dom.essayInput.value = '';
         this.loadTopic(newTopic);
